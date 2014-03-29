@@ -12,64 +12,26 @@ ofxTween::ofxTween(){
 }
 
 ofxTween::ofxTween(const ofxTween &other)
-: id(other.id),
-end_E(other.end_E),
-timestamp(other.timestamp),
-from(other.from),
-to(other.to),
-change(other.change),
-pTarget(other.pTarget),
-elapsed(other.elapsed),
-startTime(other.startTime),
-delay(other.delay),
-duration(other.duration),
-running(other.running),
-completed(other.completed),
-type(other.type),
-frameBased(other.frameBased) {
-    if (other.easingFunction) {
-        easingFunction = new ofxTweenDelegate(*other.easingFunction);
-    }
-    else {
-        easingFunction = NULL;
-    }
-    if (other.easing) {
-        easing = other.easing;
-    }
-    else {
-        easing = NULL;
-    }
-}
+: id(other.id)
+, end_E(other.end_E)
+, timestamp(other.timestamp)
+, from(other.from)
+, to(other.to)
+, change(other.change)
+, pTarget(other.pTarget)
+, elapsed(other.elapsed)
+, startTime(other.startTime)
+, delay(other.delay)
+, duration(other.duration)
+, running(other.running)
+, completed(other.completed)
+, type(other.type)
+, frameBased(other.frameBased)
+, easingFunction(other.easingFunction ? new ofxTweenDelegate(*other.easingFunction) : NULL)
+, easing(other.easing){}
 
-ofxTween ofxTween::operator=(const ofxTween &other)
-{
-    id = other.id;
-    end_E = other.end_E;
-    timestamp = other.timestamp;
-    from = other.from;
-    to = other.to;
-    change = other.change;
-    pTarget = other.pTarget;
-    elapsed = other.elapsed;
-    startTime = other.startTime;
-    delay = other.delay;
-    duration = other.duration;
-    running = other.running;
-    completed = other.completed;
-    type = other.type;
-    frameBased = other.frameBased;
-    if (other.easingFunction) {
-        easingFunction = new ofxTweenDelegate(*other.easingFunction);
-    }
-    else {
-        easingFunction = NULL;
-    }
-    if (other.easing) {
-        easing = other.easing;
-    }
-    else {
-        easing = NULL;
-    }
+ofxTween ofxTween::operator=(ofxTween other){
+    swap(*this, other);
     return *this;
 }
 
